@@ -4,8 +4,8 @@
     ":rebaseStalePrs",
     ":automergeAll",
     ":enableVulnerabilityAlerts",
-    ":enableVulnerabilityAlertsWithLabel(vulnerable)",
-    ":prHourlyLimit(5)"
+    ":enableVulnerabilityAlertsWithLabel(vulnerable)"
   ],
-  "ignorePresets": [":prHourlyLimit2"]
+  "ignorePresets": [":prHourlyLimit2"],
+  "prHourlyLimit": 5
 }
