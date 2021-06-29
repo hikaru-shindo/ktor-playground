@@ -1,5 +1,11 @@
 {
   "extends": [
-    "config:base"
-  ]
+    "config:base",
+    ":rebaseStalePrs",
+    ":automergeAll",
+    ":enableVulnerabilityAlerts",
+    ":enableVulnerabilityAlertsWithLabel(vulnerable)",
+    ":prHourlyLimit(5)"
+  ],
+  "ignorePresets": [":prHourlyLimit2"]
 }
