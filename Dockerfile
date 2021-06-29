@@ -1,6 +1,6 @@
 ARG APP_VERSION=0.0.1-SNAPSHOT
 
-FROM openjdk:14-jdk-alpine as builder
+FROM openjdk:17-jdk-alpine as builder
 ARG APP_VERSION
 
 ENV GRADLE_USER_HOME /app/.gradle
