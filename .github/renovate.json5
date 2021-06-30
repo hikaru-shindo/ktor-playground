@@ -21,7 +21,7 @@
     {
       "groupName": "io.ktor",
       "matchPackagePrefixes": [
-        "io.ktor."
+        "io.ktor:"
       ]
     }
   ]
