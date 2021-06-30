@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "config:base",
+    ":rebaseStalePrs",
+    ":enableVulnerabilityAlerts",
+    ":enableVulnerabilityAlertsWithLabel(vulnerable)"
+  ],
+  "ignorePresets": [":prHourlyLimit2"],
+  "prHourlyLimit": 5,
+  "automerge": true,
+  "automergeType": "branch",
+  "packageRules": [
+    {
+      "groupName": "kotlin",
+      "matchPackagePrefixes": [
+        "org.jetbrains.kotlin:",
+        "org.jetbrains.kotlin."
+      ],
+      "separateMinorPatch": true
+    },
+    {
+      "groupName": "io.ktor",
+      "matchPackagePrefixes": [
+        "io.ktor."
+      ]
+    }
+  ]
+}
