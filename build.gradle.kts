@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core:1.6.0")
+    implementation("io.ktor:ktor-server-core:1.6.1")
     implementation("io.ktor:ktor-metrics:1.6.1")
     implementation("io.ktor:ktor-metrics-micrometer:1.6.0")
     implementation("io.micrometer:micrometer-registry-prometheus:1.7.1")
