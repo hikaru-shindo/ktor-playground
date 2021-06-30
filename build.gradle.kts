@@ -29,7 +29,10 @@ dependencies {
     }
     implementation("ch.qos.logback:logback-classic:1.2.3")
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:6.6")
+
     testImplementation("io.ktor:ktor-server-tests:1.6.1")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.5.20")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.20")
 }
 
 
