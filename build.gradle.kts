@@ -6,6 +6,7 @@ plugins {
     id("org.jmailen.kotlinter") version "3.4.5"
     id("org.owasp.dependencycheck") version "6.2.2"
     id("com.github.johnrengelman.shadow") version "7.0.0"
+    id("jacoco")
 }
 
 group = "com.example"
@@ -43,13 +44,37 @@ tasks {
             attributes(mapOf("Main-Class" to application.mainClass))
         }
     }
+
+    test {
+        finalizedBy(jacocoTestReport)
+    }
+
+    jacocoTestReport {
+        dependsOn(test)
+
+        reports {
+            html.required.set(true)
+            csv.required.set(false)
+            xml.required.set(true)
+        }
+    }
+
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = "0.6".toBigDecimal()
+                }
+            }
+        }
+    }
 }
 
 kotlinter {
     ignoreFailures = false
     reporters = arrayOf("checkstyle", "plain")
     indentSize = 4
-    reporters = arrayOf("checkstyle", "plain")
     experimentalRules = false
     disabledRules = arrayOf("no-wildcard-imports")
 }
