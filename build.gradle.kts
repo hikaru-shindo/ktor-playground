@@ -35,7 +35,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.5.20")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.20")
 
-    testImplementation("io.mockk:mockk:1.11.0")
+    testImplementation("io.mockk:mockk:1.12.0")
 }
 
 
