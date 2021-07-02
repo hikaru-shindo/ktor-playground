@@ -12,18 +12,9 @@ import org.slf4j.event.*
 import java.util.*
 import java.util.regex.Pattern
 
-val Application.micrometerRegistry: PrometheusMeterRegistry by lazy {
-    PrometheusMeterRegistry(PrometheusConfig.DEFAULT).also { registry ->
-        registry.config().commonTags(
-            "application", "ktor-playground",
-            "squad", "foo",
-        )
-    }
-}
-
-fun Application.configureMonitoring() {
+fun Application.configureMonitoring(meterRegistry: PrometheusMeterRegistry) {
     install(MicrometerMetrics) {
-        registry = micrometerRegistry
+        registry = meterRegistry
     }
     install(CallId) {
         retrieveFromHeader(HttpHeaders.XRequestId)
@@ -42,7 +33,7 @@ fun Application.configureMonitoring() {
 
     routing {
         get("/internal/metrics") {
-            call.respond(micrometerRegistry.scrape())
+            call.respond(meterRegistry.scrape())
         }
     }
 }
