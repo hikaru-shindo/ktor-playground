@@ -1,5 +1,7 @@
 package com.example
 
+import assertk.assertThat
+import assertk.assertions.isEqualTo
 import com.example.plugins.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
@@ -32,11 +34,12 @@ class ApplicationTest {
 
         withTestApplication({
             configureRouting(meterRegistry = meterRegistry)
+            configureErrorHandler()
+            configureSerialization()
         }) {
-            assertFails {
-                handleRequest(HttpMethod.Get, "/error").apply {
-                    assertEquals(HttpStatusCode.InternalServerError, response.status())
-                }
+            handleRequest(HttpMethod.Get, "/error").apply {
+                assertThat(response.status()).isEqualTo(HttpStatusCode.InternalServerError)
+                assertThat(response.content).contains("this is a test")
             }
 
             verify(exactly = 1) {

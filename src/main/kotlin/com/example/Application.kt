@@ -18,7 +18,7 @@ fun main() {
         configureRouting(meterRegistry = prometheusMeterRegistry)
         configureHealthChecks()
         configureErrorHandler()
-        configureHTTP()
+        configureHTTP(enabledIpForwarding = !developmentMode, allowedCORSHosts = emptySet())
         configureMonitoring(meterRegistry = prometheusMeterRegistry)
         configureSerialization()
     }.start(wait = true)

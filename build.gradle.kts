@@ -36,8 +36,8 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.20")
 
     testImplementation("io.mockk:mockk:1.12.0")
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.24")
 }
-
 
 tasks {
     named<ShadowJar>("shadowJar") {

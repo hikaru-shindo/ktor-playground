@@ -12,7 +12,8 @@ fun Application.configureErrorHandler() {
                 HttpStatusCode.InternalServerError,
                 mapOf("message" to cause.message)
             )
-            throw cause
+
+            call.application.log.error("Unhandled error occured", cause)
         }
     }
 }

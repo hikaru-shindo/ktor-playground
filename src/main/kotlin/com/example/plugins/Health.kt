@@ -5,9 +5,9 @@ import io.ktor.http.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
-fun Application.configureHealthChecks() {
+fun Application.configureHealthChecks(healthEndpoint: String = "/internal/health") {
     routing {
-        route("/internal/health") {
+        route(healthEndpoint) {
             get("/liveness") {
                 call.respond(
                     HttpStatusCode.OK,

@@ -12,10 +12,15 @@ import org.slf4j.event.*
 import java.util.*
 import java.util.regex.Pattern
 
-fun Application.configureMonitoring(meterRegistry: PrometheusMeterRegistry) {
-    install(MicrometerMetrics) {
-        registry = meterRegistry
-    }
+fun Application.configureMonitoring(
+    meterRegistry: PrometheusMeterRegistry,
+    metricsEndpoint: String = "/internal/metrics"
+) {
+    configureRequestLogging()
+    configurePrometheusMetrics(meterRegistry, metricsEndpoint)
+}
+
+private fun Application.configureRequestLogging() {
     install(CallId) {
         retrieveFromHeader(HttpHeaders.XRequestId)
         generate { UUID.randomUUID().toString() }
@@ -30,9 +35,15 @@ fun Application.configureMonitoring(meterRegistry: PrometheusMeterRegistry) {
         filter { call -> call.request.path().startsWith("/") }
         callIdMdc("callId")
     }
+}
+
+private fun Application.configurePrometheusMetrics(meterRegistry: PrometheusMeterRegistry, metricsEndpoint: String) {
+    install(MicrometerMetrics) {
+        registry = meterRegistry
+    }
 
     routing {
-        get("/internal/metrics") {
+        get(metricsEndpoint) {
             call.respond(meterRegistry.scrape())
         }
     }
