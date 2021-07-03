@@ -3,6 +3,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 plugins {
     application
     kotlin("jvm") version "1.5.20"
+    kotlin("plugin.serialization") version "1.5.20"
     id("org.jmailen.kotlinter") version "3.4.5"
     id("org.owasp.dependencycheck") version "6.2.2"
     id("com.github.johnrengelman.shadow") version "7.0.0"
@@ -24,7 +25,7 @@ dependencies {
     implementation("io.ktor:ktor-metrics:1.6.2")
     implementation("io.ktor:ktor-metrics-micrometer:1.6.2")
     implementation("io.micrometer:micrometer-registry-prometheus:1.7.2")
-    implementation("io.ktor:ktor-jackson:1.6.2")
+    implementation("io.ktor:ktor-serialization:1.6.2")
     implementation("io.ktor:ktor-server-netty:1.6.2") {
         exclude("org.eclipse.jetty.alpn", "alpn-api") // HTTP/2 is not needed
     }
@@ -32,11 +33,14 @@ dependencies {
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:6.6")
 
     testImplementation("io.ktor:ktor-server-tests:1.6.2")
-    testImplementation("org.jetbrains.kotlin:kotlin-test:1.5.21")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.21")
 
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.5.20")
     testImplementation("io.mockk:mockk:1.12.0")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.24")
+    testImplementation("io.github.daviddenton:databob.kotlin:1.9.0") {
+        exclude("org.funktionale", "funktionale-all") // excluded because dep was jcenter only, spring is not open to public
+    }
+
 }
 
 tasks {
@@ -48,6 +52,7 @@ tasks {
     }
 
     test {
+        useJUnitPlatform()
         finalizedBy(jacocoTestReport)
     }
 
