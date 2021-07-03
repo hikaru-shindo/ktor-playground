@@ -3,7 +3,6 @@ package com.example.plugins
 import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
-import io.ktor.http.content.*
 
 fun Application.configureHTTP(allowedCORSHosts: Set<String>, enabledIpForwarding: Boolean) {
     configureCORS(allowedCORSHosts)

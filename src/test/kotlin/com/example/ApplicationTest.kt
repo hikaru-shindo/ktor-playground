@@ -7,10 +7,13 @@ import io.ktor.http.*
 import io.ktor.server.testing.*
 import io.micrometer.core.instrument.MeterRegistry
 import io.mockk.*
+import kotlinx.serialization.*
+import kotlinx.serialization.json.*
 import org.junit.Before
 import kotlin.test.*
 
-class ApplicationTest {
+internal class ApplicationTest {
+    private val jsonFormat = Json { isLenient = true }
     private val meterRegistry = mockk<MeterRegistry>(relaxed = true)
 
     @Before fun setup() = clearAllMocks()
@@ -18,8 +21,8 @@ class ApplicationTest {
     @Test fun `root path returns hello world`() {
         withTestApplication({ configureRouting(meterRegistry = meterRegistry) }) {
             handleRequest(HttpMethod.Get, "/").apply {
-                assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("Hello World!", response.content)
+                assertThat(response).hasStatusOk()
+                assertThat(response.content).isEqualTo("Hello World!")
             }
         }
     }
@@ -38,8 +41,12 @@ class ApplicationTest {
             configureSerialization()
         }) {
             handleRequest(HttpMethod.Get, "/error").apply {
-                assertThat(response.status()).isEqualTo(HttpStatusCode.InternalServerError)
-                assertThat(response.content).contains("this is a test")
+                assertThat(response).hasStatusInternalServerError()
+                assertThat(response).hasValidJsonBody()
+                jsonFormat.decodeFromString<ErrorResponse>(response.content!!).apply {
+                    assertThat(message).isEqualTo("this is a test")
+                    assertThat(type).isEqualTo("Exception")
+                }
             }
 
             verify(exactly = 1) {

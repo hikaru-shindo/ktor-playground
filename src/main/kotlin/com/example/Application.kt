@@ -1,6 +1,8 @@
 package com.example
 
 import com.example.plugins.*
+import com.example.shop.ProductRepository
+import com.example.shop.configureShop
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.micrometer.prometheus.PrometheusConfig
@@ -16,6 +18,7 @@ fun main() {
         }
 
         configureRouting(meterRegistry = prometheusMeterRegistry)
+        configureShop(productRepository = ProductRepository())
         configureHealthChecks()
         configureErrorHandler()
         configureHTTP(enabledIpForwarding = !developmentMode, allowedCORSHosts = emptySet())
