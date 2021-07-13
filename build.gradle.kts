@@ -32,8 +32,8 @@ dependencies {
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:6.6")
 
     testImplementation("io.ktor:ktor-server-tests:1.6.1")
-    testImplementation("org.jetbrains.kotlin:kotlin-test:1.5.20")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.20")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.5.21")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.5.21")
 
     testImplementation("io.mockk:mockk:1.12.0")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.24")
