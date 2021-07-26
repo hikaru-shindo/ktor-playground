@@ -28,7 +28,7 @@ dependencies {
     implementation("io.ktor:ktor-server-netty:1.6.1") {
         exclude("org.eclipse.jetty.alpn", "alpn-api") // HTTP/2 is not needed
     }
-    implementation("ch.qos.logback:logback-classic:1.2.3")
+    implementation("ch.qos.logback:logback-classic:1.2.5")
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:6.6")
 
     testImplementation("io.ktor:ktor-server-tests:1.6.1")
