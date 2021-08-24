@@ -34,7 +34,7 @@ dependencies {
 
     testImplementation("io.ktor:ktor-server-tests:1.6.2")
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.5.20")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.5.30")
     testImplementation("io.mockk:mockk:1.12.0")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.24")
     testImplementation("io.github.daviddenton:databob.kotlin:1.9.0") {
