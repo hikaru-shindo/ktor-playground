@@ -21,18 +21,18 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core:1.6.2")
-    implementation("io.ktor:ktor-metrics:1.6.2")
-    implementation("io.ktor:ktor-metrics-micrometer:1.6.2")
+    implementation("io.ktor:ktor-server-core:1.6.3")
+    implementation("io.ktor:ktor-metrics:1.6.3")
+    implementation("io.ktor:ktor-metrics-micrometer:1.6.3")
     implementation("io.micrometer:micrometer-registry-prometheus:1.7.3")
-    implementation("io.ktor:ktor-serialization:1.6.2")
-    implementation("io.ktor:ktor-server-netty:1.6.2") {
+    implementation("io.ktor:ktor-serialization:1.6.3")
+    implementation("io.ktor:ktor-server-netty:1.6.3") {
         exclude("org.eclipse.jetty.alpn", "alpn-api") // HTTP/2 is not needed
     }
     implementation("ch.qos.logback:logback-classic:1.2.5")
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:6.6")
 
-    testImplementation("io.ktor:ktor-server-tests:1.6.2")
+    testImplementation("io.ktor:ktor-server-tests:1.6.3")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.5.30")
     testImplementation("io.mockk:mockk:1.12.0")
