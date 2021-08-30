@@ -2,8 +2,8 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     application
-    kotlin("jvm") version "1.5.20"
-    kotlin("plugin.serialization") version "1.5.20"
+    kotlin("jvm") version "1.5.30"
+    kotlin("plugin.serialization") version "1.5.30"
     id("org.jmailen.kotlinter") version "3.5.1"
     id("org.owasp.dependencycheck") version "6.2.2"
     id("com.github.johnrengelman.shadow") version "7.0.0"
