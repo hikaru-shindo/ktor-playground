@@ -36,7 +36,7 @@ dependencies {
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.5.30")
     testImplementation("io.mockk:mockk:1.12.0")
-    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.24")
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
     testImplementation("io.github.daviddenton:databob.kotlin:1.9.0") {
         exclude("org.funktionale", "funktionale-all") // excluded because dep was jcenter only, spring is not open to public
     }
