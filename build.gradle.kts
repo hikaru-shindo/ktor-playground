@@ -22,11 +22,11 @@ repositories {
 
 dependencies {
     implementation("io.ktor:ktor-server-core:1.6.6")
-    implementation("io.ktor:ktor-metrics:1.6.6")
+    implementation("io.ktor:ktor-metrics:1.6.7")
     implementation("io.ktor:ktor-metrics-micrometer:1.6.6")
     implementation("io.micrometer:micrometer-registry-prometheus:1.8.0")
-    implementation("io.ktor:ktor-serialization:1.6.6")
-    implementation("io.ktor:ktor-server-netty:1.6.6") {
+    implementation("io.ktor:ktor-serialization:1.6.7")
+    implementation("io.ktor:ktor-server-netty:1.6.7") {
         exclude("org.eclipse.jetty.alpn", "alpn-api") // HTTP/2 is not needed
     }
     implementation("ch.qos.logback:logback-classic:1.2.7")
