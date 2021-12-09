@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core:1.6.6")
+    implementation("io.ktor:ktor-server-core:1.6.7")
     implementation("io.ktor:ktor-metrics:1.6.7")
     implementation("io.ktor:ktor-metrics-micrometer:1.6.7")
     implementation("io.micrometer:micrometer-registry-prometheus:1.8.0")
@@ -32,7 +32,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.2.7")
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.0.1")
 
-    testImplementation("io.ktor:ktor-server-tests:1.6.6")
+    testImplementation("io.ktor:ktor-server-tests:1.6.7")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.6.0")
     testImplementation("io.mockk:mockk:1.12.1")
