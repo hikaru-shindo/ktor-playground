@@ -2,8 +2,8 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     application
-    kotlin("jvm") version "1.6.0"
-    kotlin("plugin.serialization") version "1.6.0"
+    kotlin("jvm") version "1.6.10"
+    kotlin("plugin.serialization") version "1.6.10"
     id("org.jmailen.kotlinter") version "3.6.0"
     id("org.owasp.dependencycheck") version "6.5.0.1"
     id("com.github.johnrengelman.shadow") version "7.1.0"
@@ -34,7 +34,7 @@ dependencies {
 
     testImplementation("io.ktor:ktor-server-tests:1.6.7")
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.6.0")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.6.10")
     testImplementation("io.mockk:mockk:1.12.1")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
     testImplementation("io.github.daviddenton:databob.kotlin:1.9.0") {
