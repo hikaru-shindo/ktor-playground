@@ -6,7 +6,7 @@ plugins {
     kotlin("plugin.serialization") version "1.6.10"
     id("org.jmailen.kotlinter") version "3.6.0"
     id("org.owasp.dependencycheck") version "6.5.1"
-    id("com.github.johnrengelman.shadow") version "7.1.1"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
     id("jacoco")
 }
 
