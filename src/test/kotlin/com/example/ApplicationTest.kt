@@ -2,7 +2,10 @@ package com.example
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.example.plugins.*
+import com.example.plugins.ErrorResponse
+import com.example.plugins.configureErrorHandler
+import com.example.plugins.configureRouting
+import com.example.plugins.configureSerialization
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import io.micrometer.core.instrument.MeterRegistry

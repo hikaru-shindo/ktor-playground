@@ -1,6 +1,11 @@
 package com.example
 
-import com.example.plugins.*
+import com.example.plugins.configureErrorHandler
+import com.example.plugins.configureHTTP
+import com.example.plugins.configureHealthChecks
+import com.example.plugins.configureMonitoring
+import com.example.plugins.configureRouting
+import com.example.plugins.configureSerialization
 import com.example.shop.ProductRepository
 import com.example.shop.configureShop
 import io.ktor.server.engine.*

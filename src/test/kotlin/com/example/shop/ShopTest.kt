@@ -76,7 +76,7 @@ internal class ShopTest {
                         "name": "foo",
                         "price": { "value": 13.21, "currencyCode": "EUR" }
                       }
-                    """
+                        """
                     )
                 }.apply {
                     assertThat(response).hasStatusCreated()
@@ -153,7 +153,7 @@ internal class ShopTest {
                         "name": "foo",
                         "price": { "value": 13.21, "currencyCode": "EUR" }
                       }
-                    """
+                        """
                     )
                 }.apply {
                     assertThat(response).hasStatusConflict()
