@@ -11,16 +11,16 @@ class ProductRepository {
 
     private val products = mutableListOf<Product>()
 
-    fun add(product: Product) {
+    suspend fun add(product: Product) {
         if (null != find(product.id)) {
             throw ProductAlreadyExistsException(product)
         }
 
         products.add(product)
     }
-    fun find(id: UUID) = products.firstOrNull { id == it.id }?.copy()
-    fun findAll() = products.toList()
-    fun remove(id: UUID) {
+    suspend fun find(id: UUID) = products.firstOrNull { id == it.id }?.copy()
+    suspend fun findAll() = products.toList()
+    suspend fun remove(id: UUID) {
         find(id)?.let {
             products.remove(it)
         }

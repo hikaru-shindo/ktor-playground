@@ -24,11 +24,11 @@ private fun Application.configureCORS(allowedCORSHosts: Set<String>) {
         method(HttpMethod.Delete)
         method(HttpMethod.Patch)
         header(HttpHeaders.Authorization)
-        allowCredentials = true
 
         if (allowedCORSHosts.isEmpty()) {
             anyHost()
         } else {
+            allowCredentials = true
             hosts.addAll(allowedCORSHosts)
         }
     }
