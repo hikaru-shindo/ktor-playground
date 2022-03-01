@@ -28,7 +28,7 @@ internal class ShopTest {
         private val productRepository: ProductRepository = mockk()
 
         @Test fun `empty shop returns empty product list`() {
-            every { productRepository.findAll() } returns emptyList()
+            coEvery { productRepository.findAll() } returns emptyList()
 
             withTestApplication({
                 configureShop(productRepository = productRepository)
@@ -48,7 +48,7 @@ internal class ShopTest {
         }
 
         @Test fun `returns not found on unknown product`() {
-            every { productRepository.find(any()) } returns null
+            coEvery { productRepository.find(any()) } returns null
 
             withTestApplication({
                 configureShop(productRepository = productRepository)
@@ -62,7 +62,7 @@ internal class ShopTest {
         }
 
         @Test fun `product can be created`() {
-            every { productRepository.add(any()) } just runs
+            coEvery { productRepository.add(any()) } just runs
 
             withTestApplication({
                 configureShop(productRepository = productRepository)
@@ -88,7 +88,7 @@ internal class ShopTest {
                         assertThat(price.currencyCode).isEqualTo("EUR")
                     }
 
-                    verify(exactly = 1) { productRepository.add(any()) }
+                    coVerify(exactly = 1) { productRepository.add(any()) }
                 }
             }
         }
@@ -102,7 +102,7 @@ internal class ShopTest {
                     currencyCode = "EUR"
                 )
             )
-            every { productRepository.find(testProduct.id) } returns testProduct
+            coEvery { productRepository.find(testProduct.id) } returns testProduct
 
             withTestApplication({
                 configureShop(productRepository = productRepository)
@@ -122,7 +122,7 @@ internal class ShopTest {
         @Test fun `product can be removed`() {
             val testUUID = UUID.randomUUID()
 
-            every { productRepository.remove(testUUID) } just runs
+            coEvery { productRepository.remove(testUUID) } just runs
 
             withTestApplication({
                 configureShop(productRepository = productRepository)
@@ -132,13 +132,13 @@ internal class ShopTest {
                     assertThat(response).hasStatusNoContent()
                     assertThat(response.content).isNullOrEmpty()
 
-                    verify(exactly = 1) { productRepository.remove(testUUID) }
+                    coVerify(exactly = 1) { productRepository.remove(testUUID) }
                 }
             }
         }
 
         @Test fun `product cannot be created twice`() {
-            every { productRepository.add(any()) } throws ProductAlreadyExistsException(databob.mk())
+            coEvery { productRepository.add(any()) } throws ProductAlreadyExistsException(databob.mk())
 
             withTestApplication({
                 configureShop(productRepository = productRepository)
@@ -158,7 +158,7 @@ internal class ShopTest {
                 }.apply {
                     assertThat(response).hasStatusConflict()
 
-                    verify(exactly = 1) { productRepository.add(any()) }
+                    coVerify(exactly = 1) { productRepository.add(any()) }
                 }
             }
         }
