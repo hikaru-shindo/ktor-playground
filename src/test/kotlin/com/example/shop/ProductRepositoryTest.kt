@@ -4,6 +4,7 @@ import assertk.assertThat
 import assertk.assertions.*
 import io.github.databob.Databob
 import io.github.databob.Generators
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 
@@ -12,12 +13,12 @@ internal class ProductRepositoryTest {
     private val databob = Databob(Generators.ofType { databob -> createProduct(databob) })
 
     @Test
-    fun `is initialized empty`() {
+    fun `is initialized empty`() = runTest {
         assertThat(sut.findAll()).isEmpty()
     }
 
     @Test
-    fun `can add product`() {
+    fun `can add product`() = runTest {
         val product = databob.mk<Product>()
         sut.add(product)
 
@@ -27,7 +28,7 @@ internal class ProductRepositoryTest {
     }
 
     @Test
-    fun `cannot add same product twice`() {
+    fun `cannot add same product twice`() = runTest {
         val product = databob.mk<Product>()
         sut.add(product)
 
@@ -37,7 +38,7 @@ internal class ProductRepositoryTest {
     }
 
     @Test
-    fun `can add multiple products`() {
+    fun `can add multiple products`() = runTest {
         val product1 = databob.mk<Product>()
         val product2 = databob.mk<Product>()
         sut.add(product1)
@@ -49,7 +50,7 @@ internal class ProductRepositoryTest {
     }
 
     @Test
-    fun `can remove product`() {
+    fun `can remove product`() = runTest {
         val product = databob.mk<Product>()
         sut.add(product)
 
@@ -61,7 +62,7 @@ internal class ProductRepositoryTest {
     }
 
     @Test
-    fun `can find product by id`() {
+    fun `can find product by id`() = runTest {
         val product = databob.mk<Product>()
         sut.add(product)
 
@@ -71,7 +72,7 @@ internal class ProductRepositoryTest {
     }
 
     @Test
-    fun `can return all products saved`() {
+    fun `can return all products saved`() = runTest {
         val product1 = databob.mk<Product>()
         val product2 = databob.mk<Product>()
         val product3 = databob.mk<Product>()

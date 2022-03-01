@@ -1,4 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     application
@@ -31,6 +32,8 @@ dependencies {
     }
     implementation("ch.qos.logback:logback-classic:1.2.10")
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.0.1")
+
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
 
     testImplementation("io.ktor:ktor-server-tests:1.6.7")
 
@@ -90,4 +93,10 @@ dependencyCheck {
     suppressionFile = ".owaspignore.xml"
     cveValidForHours = 24
     failBuildOnCVSS = 7f // Medium and up
+}
+
+tasks.withType<KotlinCompile>().all {
+    kotlinOptions {
+        freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+    }
 }
