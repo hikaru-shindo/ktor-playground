@@ -10,12 +10,11 @@ COPY . /app
 WORKDIR /app
 RUN ./gradlew clean shadowJar -Dversion=${APP_VERSION}
 
-FROM gcr.io/distroless/java:11
+FROM gcr.io/distroless/java17:nonroot
 ARG APP_VERSION
 
 COPY --from=builder /app/build/libs/ktor-playground-${APP_VERSION}-all.jar /app.jar
 
-USER nonroot
 EXPOSE 8080
 
 CMD [ "app.jar" ]
