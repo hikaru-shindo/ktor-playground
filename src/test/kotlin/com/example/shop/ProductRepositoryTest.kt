@@ -2,15 +2,14 @@ package com.example.shop
 
 import assertk.assertThat
 import assertk.assertions.*
-import io.github.databob.Databob
-import io.github.databob.Generators
+import dev.forkhandles.fabrikate.Fabrikate
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertFailsWith
 
 internal class ProductRepositoryTest {
     private val sut = ProductRepository()
-    private val databob = Databob(Generators.ofType { databob -> createProduct(databob) })
+    private val fabrikate = Fabrikate()
 
     @Test
     fun `is initialized empty`() = runTest {
@@ -19,7 +18,7 @@ internal class ProductRepositoryTest {
 
     @Test
     fun `can add product`() = runTest {
-        val product = databob.mk<Product>()
+        val product = fabrikate.random<Product>()
         sut.add(product)
 
         sut.findAll().apply {
@@ -29,7 +28,7 @@ internal class ProductRepositoryTest {
 
     @Test
     fun `cannot add same product twice`() = runTest {
-        val product = databob.mk<Product>()
+        val product = fabrikate.random<Product>()
         sut.add(product)
 
         assertFailsWith<ProductRepository.ProductAlreadyExistsException> {
@@ -39,8 +38,8 @@ internal class ProductRepositoryTest {
 
     @Test
     fun `can add multiple products`() = runTest {
-        val product1 = databob.mk<Product>()
-        val product2 = databob.mk<Product>()
+        val product1 = fabrikate.random<Product>()
+        val product2 = fabrikate.random<Product>()
         sut.add(product1)
         sut.add(product2)
 
@@ -51,7 +50,7 @@ internal class ProductRepositoryTest {
 
     @Test
     fun `can remove product`() = runTest {
-        val product = databob.mk<Product>()
+        val product = fabrikate.random<Product>()
         sut.add(product)
 
         sut.remove(product.id)
@@ -63,7 +62,7 @@ internal class ProductRepositoryTest {
 
     @Test
     fun `can find product by id`() = runTest {
-        val product = databob.mk<Product>()
+        val product = fabrikate.random<Product>()
         sut.add(product)
 
         sut.find(product.id).apply {
@@ -73,10 +72,10 @@ internal class ProductRepositoryTest {
 
     @Test
     fun `can return all products saved`() = runTest {
-        val product1 = databob.mk<Product>()
-        val product2 = databob.mk<Product>()
-        val product3 = databob.mk<Product>()
-        val product4 = databob.mk<Product>()
+        val product1 = fabrikate.random<Product>()
+        val product2 = fabrikate.random<Product>()
+        val product3 = fabrikate.random<Product>()
+        val product4 = fabrikate.random<Product>()
         sut.add(product1)
         sut.add(product2)
         sut.add(product3)

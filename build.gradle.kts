@@ -40,10 +40,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.6.10")
     testImplementation("io.mockk:mockk:1.12.3")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
-    testImplementation("io.github.daviddenton:databob.kotlin:1.9.0") {
-        exclude("org.funktionale", "funktionale-all") // excluded because dep was jcenter only, spring is not open to public
-    }
-
+    testImplementation("dev.forkhandles:fabrikate4k:2.0.0.0")
 }
 
 tasks {
