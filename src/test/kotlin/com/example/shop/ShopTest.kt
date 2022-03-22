@@ -5,8 +5,7 @@ import assertk.assertions.*
 import com.example.*
 import com.example.plugins.*
 import com.example.shop.ProductRepository.ProductAlreadyExistsException
-import io.github.databob.Databob
-import io.github.databob.Generators
+import dev.forkhandles.fabrikate.Fabrikate
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import io.mockk.*
@@ -19,7 +18,7 @@ import kotlin.test.*
 
 internal class ShopTest {
     private val jsonFormat = Json { isLenient = true }
-    private val databob = Databob(Generators.ofType { databob -> createProduct(databob) })
+    private val fabrikate = Fabrikate()
 
     @Before fun setup() = clearAllMocks()
 
@@ -138,7 +137,7 @@ internal class ShopTest {
         }
 
         @Test fun `product cannot be created twice`() {
-            coEvery { productRepository.add(any()) } throws ProductAlreadyExistsException(databob.mk())
+            coEvery { productRepository.add(any()) } throws ProductAlreadyExistsException(fabrikate.random())
 
             withTestApplication({
                 configureShop(productRepository = productRepository)
