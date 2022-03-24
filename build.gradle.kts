@@ -1,5 +1,6 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.owasp.dependencycheck.reporting.ReportGenerator.Format
 
 plugins {
     application
@@ -41,6 +42,16 @@ dependencies {
     testImplementation("io.mockk:mockk:1.12.3")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
     testImplementation("dev.forkhandles:fabrikate4k:2.0.0.0")
+
+    dependencyCheck {
+        // contains vulnerable dependencies which should be ignored for good reasons, like false positives
+        suppressionFile = "$projectDir/.owaspignore.xml"
+        autoUpdate = true
+        failOnError = true
+        cveValidForHours = 8
+        failBuildOnCVSS = 0f
+        format = Format.ALL
+    }
 }
 
 tasks {

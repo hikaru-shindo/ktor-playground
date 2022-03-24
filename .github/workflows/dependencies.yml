@@ -1,26 +1,23 @@
-name: CI
+name: Dependency Checks
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  schedule:
+    - cron: 0 */3 * * *
   workflow_dispatch:
 
 jobs:
-  test:
+  owasp:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Java JDK
+      - name: Setup JDK
         uses: actions/setup-java@v3.0.0
         with:
           java-version: '17'
           distribution: 'adopt'
           check-latest: true
 
-      - name: check
-        run: ./gradlew clean check
-
+      - name: OWASP Dependency Check
+        run: ./gradlew clean dependencyCheckAnalyze
