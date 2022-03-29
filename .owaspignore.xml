@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <suppress>
+        <notes>
+            fasterxml jackson module for kotlin: should not be exploitable, as it is only the log encoder
+        </notes>
+        <cve>CVE-2020-36518</cve>
+    </suppress>
 </suppressions>
