@@ -22,7 +22,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-     - name: Setup JDK
+      - name: Setup JDK
         uses: actions/setup-java@v3.0.0
         with:
           java-version: '17'
