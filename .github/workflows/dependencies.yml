@@ -11,23 +11,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-  
-      - name: Setup Gradle cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
 
       - name: Setup JDK
         uses: actions/setup-java@v3.1.0
         with:
           java-version: '17'
-          distribution: 'adopt'
+          distribution: adopt
           check-latest: true
+          cache: gradle
 
       - name: OWASP Dependency Check
         run: ./gradlew clean dependencyCheckAnalyze
