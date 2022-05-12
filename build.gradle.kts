@@ -26,7 +26,7 @@ dependencies {
     implementation("io.ktor:ktor-server-core:1.6.8")
     implementation("io.ktor:ktor-metrics:1.6.8")
     implementation("io.ktor:ktor-metrics-micrometer:1.6.8")
-    implementation("io.micrometer:micrometer-registry-prometheus:1.8.6")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.9.0")
     implementation("io.ktor:ktor-serialization:1.6.8")
     implementation("io.ktor:ktor-server-netty:1.6.8") {
         exclude("org.eclipse.jetty.alpn", "alpn-api") // HTTP/2 is not needed
