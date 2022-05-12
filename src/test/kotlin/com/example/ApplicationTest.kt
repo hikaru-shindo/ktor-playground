@@ -6,26 +6,29 @@ import com.example.plugins.ErrorResponse
 import com.example.plugins.configureErrorHandler
 import com.example.plugins.configureRouting
 import com.example.plugins.configureSerialization
-import io.ktor.http.*
+import io.ktor.client.call.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.testing.*
 import io.micrometer.core.instrument.MeterRegistry
 import io.mockk.*
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
 import org.junit.Before
 import kotlin.test.*
 
 internal class ApplicationTest {
-    private val jsonFormat = Json { isLenient = true }
     private val meterRegistry = mockk<MeterRegistry>(relaxed = true)
 
     @Before fun setup() = clearAllMocks()
 
     @Test fun `root path returns hello world`() {
-        withTestApplication({ configureRouting(meterRegistry = meterRegistry) }) {
-            handleRequest(HttpMethod.Get, "/").apply {
+        testApplication {
+            application { configureRouting(meterRegistry = meterRegistry) }
+
+            client.get("/").let { response ->
                 assertThat(response).hasStatusOk()
-                assertThat(response.content).isEqualTo("Hello World!")
+                assertThat(response.bodyAsText()).isEqualTo("Hello World!")
             }
         }
     }
@@ -38,15 +41,19 @@ internal class ApplicationTest {
             ).increment()
         } just runs
 
-        withTestApplication({
-            configureRouting(meterRegistry = meterRegistry)
-            configureErrorHandler()
-            configureSerialization()
-        }) {
-            handleRequest(HttpMethod.Get, "/error").apply {
+        testApplication {
+            application {
+                configureRouting(meterRegistry = meterRegistry)
+                configureErrorHandler()
+                configureSerialization()
+            }
+
+            val client = createJsonClient()
+
+            client.get("/error").let { response ->
                 assertThat(response).hasStatusInternalServerError()
-                assertThat(response).hasValidJsonBody()
-                jsonFormat.decodeFromString<ErrorResponse>(response.content!!).apply {
+                assertThat(response).isJsonResponse()
+                response.body<ErrorResponse>().apply {
                     assertThat(message).isEqualTo("this is a test")
                     assertThat(type).isEqualTo("Exception")
                 }
