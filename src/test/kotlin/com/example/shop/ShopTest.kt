@@ -6,18 +6,17 @@ import com.example.*
 import com.example.plugins.*
 import com.example.shop.ProductRepository.ProductAlreadyExistsException
 import dev.forkhandles.fabrikate.Fabrikate
+import io.ktor.client.call.*
+import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import io.mockk.*
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
 import org.junit.Before
 import org.junit.jupiter.api.Nested
 import java.util.*
 import kotlin.test.*
 
 internal class ShopTest {
-    private val jsonFormat = Json { isLenient = true }
     private val fabrikate = Fabrikate()
 
     @Before fun setup() = clearAllMocks()
@@ -29,16 +28,19 @@ internal class ShopTest {
         @Test fun `empty shop returns empty product list`() {
             coEvery { productRepository.findAll() } returns emptyList()
 
-            withTestApplication({
-                configureShop(productRepository = productRepository)
-                configureSerialization()
-            }) {
-                handleRequest(HttpMethod.Get, "/product").apply {
+            testApplication {
+                application {
+                    configureShop(productRepository = productRepository)
+                    configureSerialization()
+                }
+
+                val client = createJsonClient()
+
+                client.get("/product").let { response ->
                     assertThat(response).hasStatusOk()
                     assertThat(response).isJsonResponse()
-                    assertThat(response).hasValidJsonBody()
 
-                    jsonFormat.decodeFromString<ProductListResponse>(response.content!!).apply {
+                    response.body<ProductListResponse>().apply {
                         assertThat(products).isEmpty()
                         assertThat(count).isEqualTo(0)
                     }
@@ -49,13 +51,15 @@ internal class ShopTest {
         @Test fun `returns not found on unknown product`() {
             coEvery { productRepository.find(any()) } returns null
 
-            withTestApplication({
-                configureShop(productRepository = productRepository)
-                configureSerialization()
-            }) {
-                handleRequest(HttpMethod.Get, "/product/${UUID.randomUUID()}").apply {
+            testApplication {
+                application {
+                    configureShop(productRepository = productRepository)
+                    configureSerialization()
+                }
+
+                client.get("/product/${UUID.randomUUID()}").let { response ->
                     assertThat(response).hasStatusNotFound()
-                    assertThat(response.content).isNullOrEmpty()
+                    assertThat(response).hasEmptyBody()
                 }
             }
         }
@@ -63,28 +67,27 @@ internal class ShopTest {
         @Test fun `product can be created`() {
             coEvery { productRepository.add(any()) } just runs
 
-            withTestApplication({
-                configureShop(productRepository = productRepository)
-                configureSerialization()
-            }) {
-                handleRequest(HttpMethod.Post, "/product") {
-                    addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-                    setBody(
-                        """
-                      {
-                        "name": "foo",
-                        "price": { "value": 13.21, "currencyCode": "EUR" }
-                      }
-                        """
-                    )
-                }.apply {
+            testApplication {
+                application {
+                    configureShop(productRepository = productRepository)
+                    configureSerialization()
+                }
+
+                val client = createJsonClient()
+
+                val product = fabrikate.random<Product>()
+
+                client.post("/product") {
+                    contentType(ContentType.Application.Json)
+                    setBody(product)
+                }.let { response ->
                     assertThat(response).hasStatusCreated()
                     assertThat(response).isJsonResponse()
-                    assertThat(response).hasValidJsonBody()
-                    jsonFormat.decodeFromString<Product>(response.content!!).apply {
-                        assertThat(name).isEqualTo("foo")
-                        assertThat(price.value).isEqualTo(13.21)
-                        assertThat(price.currencyCode).isEqualTo("EUR")
+
+                    response.body<Product>().apply {
+                        assertThat(name).isEqualTo(product.name)
+                        assertThat(price.value).isEqualTo(product.price.value)
+                        assertThat(price.currencyCode).isEqualTo(product.price.currencyCode)
                     }
 
                     coVerify(exactly = 1) { productRepository.add(any()) }
@@ -93,26 +96,24 @@ internal class ShopTest {
         }
 
         @Test fun `product can be retrieved`() {
-            val testProduct = Product(
-                id = UUID.randomUUID(),
-                name = "foo",
-                price = Price(
-                    value = 47.11,
-                    currencyCode = "EUR"
-                )
-            )
-            coEvery { productRepository.find(testProduct.id) } returns testProduct
+            val product = fabrikate.random<Product>()
 
-            withTestApplication({
-                configureShop(productRepository = productRepository)
-                configureSerialization()
-            }) {
-                handleRequest(HttpMethod.Get, "/product/${testProduct.id}").apply {
+            coEvery { productRepository.find(product.id) } returns product
+
+            testApplication {
+                application {
+                    configureShop(productRepository = productRepository)
+                    configureSerialization()
+                }
+
+                val client = createJsonClient()
+
+                client.get("/product/${product.id}").let { response ->
                     assertThat(response).hasStatusOk()
                     assertThat(response).isJsonResponse()
-                    assertThat(response).hasValidJsonBody()
-                    jsonFormat.decodeFromString<Product>(response.content!!).apply {
-                        assertThat(this).isDataClassEqualTo(testProduct)
+
+                    response.body<Product>().apply {
+                        assertThat(this).isDataClassEqualTo(product)
                     }
                 }
             }
@@ -123,13 +124,15 @@ internal class ShopTest {
 
             coEvery { productRepository.remove(testUUID) } just runs
 
-            withTestApplication({
-                configureShop(productRepository = productRepository)
-                configureSerialization()
-            }) {
-                handleRequest(HttpMethod.Delete, "/product/$testUUID").apply {
+            testApplication {
+                application {
+                    configureShop(productRepository = productRepository)
+                    configureSerialization()
+                }
+
+                client.delete("/product/$testUUID").let { response ->
                     assertThat(response).hasStatusNoContent()
-                    assertThat(response.content).isNullOrEmpty()
+                    assertThat(response).hasEmptyBody()
 
                     coVerify(exactly = 1) { productRepository.remove(testUUID) }
                 }
@@ -139,22 +142,19 @@ internal class ShopTest {
         @Test fun `product cannot be created twice`() {
             coEvery { productRepository.add(any()) } throws ProductAlreadyExistsException(fabrikate.random())
 
-            withTestApplication({
-                configureShop(productRepository = productRepository)
-                configureSerialization()
-                configureErrorHandler()
-            }) {
-                handleRequest(HttpMethod.Post, "/product") {
-                    addHeader(HttpHeaders.ContentType, ContentType.Application.Json.toString())
-                    setBody(
-                        """
-                      {
-                        "name": "foo",
-                        "price": { "value": 13.21, "currencyCode": "EUR" }
-                      }
-                        """
-                    )
-                }.apply {
+            testApplication {
+                application {
+                    configureShop(productRepository = productRepository)
+                    configureSerialization()
+                    configureErrorHandler()
+                }
+
+                val client = createJsonClient()
+
+                client.post("/product") {
+                    contentType(ContentType.Application.Json)
+                    setBody(fabrikate.random<Product>())
+                }.let { response ->
                     assertThat(response).hasStatusConflict()
 
                     coVerify(exactly = 1) { productRepository.add(any()) }
