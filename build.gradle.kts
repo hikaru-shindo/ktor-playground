@@ -47,7 +47,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.6.21")
     testImplementation("io.mockk:mockk:1.12.4")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
-    testImplementation("dev.forkhandles:fabrikate4k:2.1.1.0")
+    testImplementation("dev.forkhandles:fabrikate4k:2.1.2.0")
 
     dependencyCheck {
         // contains vulnerable dependencies which should be ignored for good reasons, like false positives
