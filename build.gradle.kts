@@ -6,7 +6,7 @@ plugins {
     application
     kotlin("jvm") version "1.7.10"
     kotlin("plugin.serialization") version "1.7.10"
-    id("org.jmailen.kotlinter") version "3.10.0"
+    id("org.jmailen.kotlinter") version "3.11.1"
     id("org.owasp.dependencycheck") version "7.1.1"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("jacoco")
