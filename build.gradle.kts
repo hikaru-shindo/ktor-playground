@@ -1,4 +1,3 @@
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.owasp.dependencycheck.reporting.ReportGenerator.Format
 
@@ -6,9 +5,9 @@ plugins {
     application
     kotlin("jvm") version "1.7.10"
     kotlin("plugin.serialization") version "1.7.10"
+    id("io.ktor.plugin") version "2.1.0"
     id("org.jmailen.kotlinter") version "3.10.0"
     id("org.owasp.dependencycheck") version "7.1.1"
-    id("com.github.johnrengelman.shadow") version "7.1.2"
     id("jacoco")
 }
 
@@ -16,6 +15,12 @@ group = "com.example"
 version = System.getProperty("version") ?: "0.0.1-SNAPSHOT"
 application {
     mainClass.set("com.example.ApplicationKt")
+}
+
+ktor {
+    fatJar {
+        archiveFileName.set("ktor-playground-${version}.jar")
+    }
 }
 
 repositories {
@@ -61,13 +66,6 @@ dependencies {
 }
 
 tasks {
-    named<ShadowJar>("shadowJar") {
-        mergeServiceFiles()
-        manifest {
-            attributes(mapOf("Main-Class" to application.mainClass))
-        }
-    }
-
     test {
         useJUnitPlatform()
         finalizedBy(jacocoTestReport)

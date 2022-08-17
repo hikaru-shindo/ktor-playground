@@ -8,13 +8,13 @@ ENV GRADLE_OPTS "-Dorg.gradle.parallel=true -Dorg.gradle.daemon=false"
 
 COPY . /app
 WORKDIR /app
-RUN ./gradlew clean shadowJar -Dversion=${APP_VERSION}
+RUN ./gradlew buildFatJar -Dversion=${APP_VERSION}
 
 FROM gcr.io/distroless/java17:nonroot
 ARG APP_VERSION
 
-COPY --from=builder /app/build/libs/ktor-playground-${APP_VERSION}-all.jar /app.jar
+COPY --from=builder /app/build/libs/ktor-playground-${APP_VERSION}.jar /app.jar
 
 EXPOSE 8080
 
-CMD [ "app.jar" ]
+CMD [ "/app.jar" ]
