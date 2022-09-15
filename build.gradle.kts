@@ -50,7 +50,7 @@ dependencies {
     testImplementation("io.ktor:ktor-client-content-negotiation:2.1.1")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.7.10")
-    testImplementation("io.mockk:mockk:1.12.7")
+    testImplementation("io.mockk:mockk:1.12.8")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
     testImplementation("dev.forkhandles:fabrikate4k:2.2.0.0")
 
