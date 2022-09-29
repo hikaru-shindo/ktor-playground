@@ -3,8 +3,8 @@ import org.owasp.dependencycheck.reporting.ReportGenerator.Format
 
 plugins {
     application
-    kotlin("jvm") version "1.7.10"
-    kotlin("plugin.serialization") version "1.7.10"
+    kotlin("jvm") version "1.7.20"
+    kotlin("plugin.serialization") version "1.7.20"
     id("io.ktor.plugin") version "2.1.1"
     id("org.jmailen.kotlinter") version "3.10.0"
     id("org.owasp.dependencycheck") version "7.2.1"
@@ -49,7 +49,7 @@ dependencies {
     testImplementation("io.ktor:ktor-server-test-host:2.1.1")
     testImplementation("io.ktor:ktor-client-content-negotiation:2.1.1")
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.7.10")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.7.20")
     testImplementation("io.mockk:mockk:1.13.2")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.25")
     testImplementation("dev.forkhandles:fabrikate4k:2.2.0.0")
