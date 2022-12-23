@@ -17,8 +17,10 @@ fun main() {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
         val prometheusMeterRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT).also { registry ->
             registry.config().commonTags(
-                "application", "ktor-playground",
-                "squad", "foo",
+                "application",
+                "ktor-playground",
+                "squad",
+                "foo"
             )
         }
 
