@@ -37,7 +37,8 @@ internal class ApplicationTest {
         every {
             meterRegistry.counter(
                 "error_endpoint_calls",
-                "foo", "bar",
+                "foo",
+                "bar"
             ).increment()
         } just runs
 
@@ -62,7 +63,8 @@ internal class ApplicationTest {
             verify(exactly = 1) {
                 meterRegistry.counter(
                     "error_endpoint_calls",
-                    "foo", "bar",
+                    "foo",
+                    "bar"
                 ).increment()
             }
         }

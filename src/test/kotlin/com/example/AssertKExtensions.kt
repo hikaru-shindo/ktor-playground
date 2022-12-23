@@ -26,11 +26,14 @@ fun Assert<HttpResponse>.hasStatusConflict() = hasStatus(HttpStatusCode.Conflict
 
 fun Assert<HttpResponse>.hasEmptyBody() = runBlocking {
     given { actual ->
-        if (actual.bodyAsText().isNotEmpty()) expected("to be empty but is not")
+        if (actual.bodyAsText().isNotEmpty()) {
+            expected("to be empty but is not")
+        }
     }
 }
 
 fun Assert<HttpResponse>.isJsonResponse() = given { actual ->
-    if (false == actual.contentType()?.match(ContentType.Application.Json))
+    if (false == actual.contentType()?.match(ContentType.Application.Json)) {
         expected("to have ${ContentType.Application.Json} content type, but is ${actual.contentType()}")
+    }
 }
