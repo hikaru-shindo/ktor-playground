@@ -5,5 +5,7 @@
             fasterxml jackson module for kotlin: should not be exploitable, as it is only the log encoder
         </notes>
         <cve>CVE-2020-36518</cve>
+        <cve>CVE-2022-42003</cve>
+        <cve>CVE-2022-42004</cve>
     </suppress>
 </suppressions>
