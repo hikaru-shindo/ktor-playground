@@ -12,17 +12,26 @@ class ProductRepository {
     private val products = mutableListOf<Product>()
 
     suspend fun add(product: Product) {
-        if (null != find(product.id)) {
+        if (products.any { existingProduct -> existingProduct.id == product.id }) {
             throw ProductAlreadyExistsException(product)
         }
 
         products.add(product)
     }
-    suspend fun find(id: UUID) = products.firstOrNull { id == it.id }?.copy()
-    suspend fun findAll() = products.toList()
+
+    suspend fun find(id: UUID) = products.firstOrNull { product ->
+        id == product.id
+    }?.copy()
+
+    suspend fun findAll() = products.toList().map { product ->
+        product.copy()
+    }
+
     suspend fun remove(id: UUID) {
-        find(id)?.let {
-            products.remove(it)
+        products.firstOrNull { product ->
+            id == product.id
+        }?.also { product ->
+            products.remove(product)
         }
     }
 }
@@ -40,7 +49,7 @@ data class Product(
     val id: UUID = UUID.randomUUID(),
     val name: String,
     val price: Price
-)
-
-@Serializable
-data class Price(val value: Double, val currencyCode: String)
+) {
+    @Serializable
+    data class Price(val value: Double, val currencyCode: String)
+}

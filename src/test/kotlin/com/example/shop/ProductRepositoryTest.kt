@@ -38,13 +38,17 @@ internal class ProductRepositoryTest {
 
     @Test
     fun `can add multiple products`() = runTest {
-        val product1 = fabrikate.random<Product>()
-        val product2 = fabrikate.random<Product>()
-        sut.add(product1)
-        sut.add(product2)
+        val testProducts = arrayOf<Product>(
+            fabrikate.random(),
+            fabrikate.random()
+        )
+
+        testProducts.forEach { testProduct ->
+            sut.add(testProduct)
+        }
 
         sut.findAll().apply {
-            assertThat(this).hasSize(2)
+            assertThat(this).containsAll(*testProducts)
         }
     }
 
@@ -67,26 +71,28 @@ internal class ProductRepositoryTest {
 
         sut.find(product.id).apply {
             assertThat(this).isEqualTo(product)
+            assertThat(this).isNotSameAs(product)
         }
     }
 
     @Test
     fun `can return all products saved`() = runTest {
-        val product1 = fabrikate.random<Product>()
-        val product2 = fabrikate.random<Product>()
-        val product3 = fabrikate.random<Product>()
-        val product4 = fabrikate.random<Product>()
-        sut.add(product1)
-        sut.add(product2)
-        sut.add(product3)
-        sut.add(product4)
+        val testProducts = arrayOf<Product>(
+            fabrikate.random(),
+            fabrikate.random(),
+            fabrikate.random(),
+            fabrikate.random()
+        )
+
+        testProducts.forEach { testProduct ->
+            sut.add(testProduct)
+        }
 
         sut.findAll().apply {
-            assertThat(this).contains(product1)
-            assertThat(this).contains(product2)
-            assertThat(this).contains(product3)
-            assertThat(this).contains(product4)
-            assertThat(this).hasSize(4)
+            assertThat(this).containsExactlyInAnyOrder(*testProducts)
+            testProducts.forEach { testProduct ->
+                assertThat(this.any { product -> testProduct === product }).isFalse()
+            }
         }
     }
 }
