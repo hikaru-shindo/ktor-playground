@@ -28,17 +28,17 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-content-negotiation:2.2.1")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.1")
-    implementation("io.ktor:ktor-server-metrics:2.2.1")
-    implementation("io.ktor:ktor-server-call-id:2.2.1")
-    implementation("io.ktor:ktor-server-forwarded-header:2.2.1")
-    implementation("io.ktor:ktor-server-status-pages:2.2.1")
-    implementation("io.ktor:ktor-server-call-logging:2.2.1")
-    implementation("io.ktor:ktor-server-cors:2.2.1")
-    implementation("io.ktor:ktor-server-metrics-micrometer:2.2.1")
+    implementation("io.ktor:ktor-server-content-negotiation:2.2.2")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.2")
+    implementation("io.ktor:ktor-server-metrics:2.2.2")
+    implementation("io.ktor:ktor-server-call-id:2.2.2")
+    implementation("io.ktor:ktor-server-forwarded-header:2.2.2")
+    implementation("io.ktor:ktor-server-status-pages:2.2.2")
+    implementation("io.ktor:ktor-server-call-logging:2.2.2")
+    implementation("io.ktor:ktor-server-cors:2.2.2")
+    implementation("io.ktor:ktor-server-metrics-micrometer:2.2.2")
     implementation("io.micrometer:micrometer-registry-prometheus:1.10.2")
-    implementation("io.ktor:ktor-server-netty:2.2.1") {
+    implementation("io.ktor:ktor-server-netty:2.2.2") {
         exclude("org.eclipse.jetty.alpn", "alpn-api") // HTTP/2 is not needed
     }
     implementation("ch.qos.logback:logback-classic:1.4.5")
@@ -46,8 +46,8 @@ dependencies {
 
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
 
-    testImplementation("io.ktor:ktor-server-test-host:2.2.1")
-    testImplementation("io.ktor:ktor-client-content-negotiation:2.2.1")
+    testImplementation("io.ktor:ktor-server-test-host:2.2.2")
+    testImplementation("io.ktor:ktor-client-content-negotiation:2.2.2")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.8.0")
     testImplementation("io.mockk:mockk:1.13.3")
