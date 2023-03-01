@@ -33,12 +33,12 @@ dependencies {
     implementation("io.ktor:ktor-server-metrics:2.2.4")
     implementation("io.ktor:ktor-server-call-id:2.2.4")
     implementation("io.ktor:ktor-server-forwarded-header:2.2.4")
-    implementation("io.ktor:ktor-server-status-pages:2.2.3")
+    implementation("io.ktor:ktor-server-status-pages:2.2.4")
     implementation("io.ktor:ktor-server-call-logging:2.2.4")
     implementation("io.ktor:ktor-server-cors:2.2.4")
     implementation("io.ktor:ktor-server-metrics-micrometer:2.2.4")
     implementation("io.micrometer:micrometer-registry-prometheus:1.10.4")
-    implementation("io.ktor:ktor-server-netty:2.2.3") {
+    implementation("io.ktor:ktor-server-netty:2.2.4") {
         exclude("org.eclipse.jetty.alpn", "alpn-api") // HTTP/2 is not needed
     }
     implementation("ch.qos.logback:logback-classic:1.4.5")
