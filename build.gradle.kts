@@ -44,7 +44,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.4.7")
     runtimeOnly("net.logstash.logback:logstash-logback-encoder:7.3")
 
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.0")
 
     testImplementation("io.ktor:ktor-server-test-host:2.3.0")
     testImplementation("io.ktor:ktor-client-content-negotiation:2.3.0")
