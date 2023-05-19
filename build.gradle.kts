@@ -7,7 +7,7 @@ plugins {
     kotlin("plugin.serialization") version "1.8.21"
     id("io.ktor.plugin") version "2.3.0"
     id("org.jmailen.kotlinter") version "3.13.0"
-    id("org.owasp.dependencycheck") version "8.0.2"
+    id("org.owasp.dependencycheck") version "8.2.1"
     id("jacoco")
 }
 
@@ -53,16 +53,6 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.5")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.26.1")
     testImplementation("dev.forkhandles:fabrikate4k:2.5.0.0")
-
-    dependencyCheck {
-        // contains vulnerable dependencies which should be ignored for good reasons, like false positives
-        suppressionFile = "$projectDir/.owaspignore.xml"
-        autoUpdate = true
-        failOnError = true
-        cveValidForHours = 8
-        failBuildOnCVSS = 0f
-        format = Format.ALL
-    }
 }
 
 tasks {
@@ -107,7 +97,9 @@ kotlinter {
 }
 
 dependencyCheck {
-    suppressionFile = ".owaspignore.xml"
+    suppressionFile = "$projectDir/.owaspignore.xml"
+    autoUpdate = true
+    failOnError = true
     cveValidForHours = 24
     failBuildOnCVSS = 7f // Medium and up
 }
