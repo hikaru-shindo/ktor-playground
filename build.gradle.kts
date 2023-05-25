@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.owasp.dependencycheck.reporting.ReportGenerator.Format
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
     application
     kotlin("jvm") version "1.8.21"
     kotlin("plugin.serialization") version "1.8.21"
     id("io.ktor.plugin") version "2.3.0"
-    id("org.jmailen.kotlinter") version "3.14.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
     id("org.owasp.dependencycheck") version "8.2.1"
     id("jacoco")
 }
@@ -19,7 +19,7 @@ application {
 
 ktor {
     fatJar {
-        archiveFileName.set("ktor-playground-${version}.jar")
+        archiveFileName.set("ktor-playground-$version.jar")
     }
 }
 
@@ -71,7 +71,6 @@ tasks {
         }
     }
 
-
     jacocoTestCoverageVerification {
         violationRules {
             rule {
@@ -89,11 +88,14 @@ jacoco {
     toolVersion = "0.8.10"
 }
 
-kotlinter {
-    ignoreFailures = false
-    reporters = arrayOf("checkstyle", "plain")
-    experimentalRules = false
-    disabledRules = arrayOf("no-wildcard-imports")
+ktlint {
+    verbose.set(true)
+    reporters {
+        reporter(ReporterType.CHECKSTYLE)
+        reporter(ReporterType.JSON)
+        reporter(ReporterType.HTML)
+        reporter(ReporterType.PLAIN)
+    }
 }
 
 dependencyCheck {
