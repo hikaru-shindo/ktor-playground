@@ -1,3 +1,5 @@
+root = true
+
 [*]
 charset=utf-8
 end_of_line=lf
@@ -6,8 +8,13 @@ indent_style=space
 indent_size=4
 max_line_length=120
 
-[*.{json, json5}]
+[*.{kt,kts}]
+ktlint_code_style=ktlint_official
+ktlint_experimental=false
+ktlint_disabled_rules=no-wildcard-imports
+
+[*.{json,json5}]
 indent_size=2
 
-[*.{yml, yaml}]
+[*.{yml,yaml}]
 indent_size=2
