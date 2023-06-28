@@ -5,7 +5,7 @@ plugins {
     application
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.serialization") version "1.8.22"
-    id("io.ktor.plugin") version "2.3.1"
+    id("io.ktor.plugin") version "2.3.2"
     id("org.jlleitschuh.gradle.ktlint") version "11.4.2"
     id("org.owasp.dependencycheck") version "8.3.1"
     id("jacoco")
