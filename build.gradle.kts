@@ -7,7 +7,7 @@ plugins {
     kotlin("plugin.serialization") version "1.9.0"
     id("io.ktor.plugin") version "2.3.3"
     id("org.jlleitschuh.gradle.ktlint") version "11.5.1"
-    id("org.owasp.dependencycheck") version "8.3.1"
+    id("org.owasp.dependencycheck") version "8.4.0"
     id("jacoco")
 }
 
