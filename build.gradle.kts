@@ -91,7 +91,7 @@ tasks {
 jacoco {
     // fix an issue with new JRE versions
     // see: https://github.com/gradle/gradle/issues/15038
-    toolVersion = "0.8.10"
+    toolVersion = "0.8.11"
 }
 
 ktlint {
