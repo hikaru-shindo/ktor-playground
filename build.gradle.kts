@@ -43,7 +43,7 @@ dependencies {
     implementation("io.ktor:ktor-server-call-logging:2.3.6")
     implementation("io.ktor:ktor-server-cors:2.3.6")
     implementation("io.ktor:ktor-server-metrics-micrometer:2.3.6")
-    implementation("io.micrometer:micrometer-registry-prometheus:1.11.5")
+    implementation("io.micrometer:micrometer-registry-prometheus:1.11.6")
     implementation("io.ktor:ktor-server-netty:2.3.6") {
         exclude("org.eclipse.jetty.alpn", "alpn-api") // HTTP/2 is not needed
     }
