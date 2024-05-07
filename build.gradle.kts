@@ -3,8 +3,8 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
     application
-    kotlin("jvm") version "1.9.23"
-    kotlin("plugin.serialization") version "1.9.23"
+    kotlin("jvm") version "1.9.24"
+    kotlin("plugin.serialization") version "1.9.24"
     id("io.ktor.plugin") version "2.3.10"
     id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
     id("org.owasp.dependencycheck") version "8.4.3"
@@ -55,7 +55,7 @@ dependencies {
     testImplementation("io.ktor:ktor-server-test-host:2.3.10")
     testImplementation("io.ktor:ktor-client-content-negotiation:2.3.10")
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.9.23")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.9.24")
     testImplementation("io.mockk:mockk:1.13.10")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.28.1")
     testImplementation("dev.forkhandles:fabrikate4k:2.18.0.1")
