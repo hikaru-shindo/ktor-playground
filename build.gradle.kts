@@ -58,7 +58,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.9.24")
     testImplementation("io.mockk:mockk:1.13.11")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.28.1")
-    testImplementation("dev.forkhandles:fabrikate4k:2.18.0.1")
+    testImplementation("dev.forkhandles:fabrikate4k:2.19.0.0")
 }
 
 tasks {
