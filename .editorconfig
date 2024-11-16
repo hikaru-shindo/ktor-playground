@@ -10,8 +10,8 @@ max_line_length=120
 
 [*.{kt,kts}]
 ktlint_code_style=ktlint_official
-ktlint_experimental=false
-ktlint_disabled_rules=no-wildcard-imports
+ktlint_experimental=disabled
+ktlint_standard_no-wildcard-imports=disabled
 
 [*.{json,json5}]
 indent_size=2
