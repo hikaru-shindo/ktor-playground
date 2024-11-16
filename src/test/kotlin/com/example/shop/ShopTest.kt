@@ -70,7 +70,7 @@ internal class ShopTest {
                     assertThat(response).isJsonResponse()
 
                     response.body<ProductListResponse>().apply {
-                        assertThat(products).containsAll(*testProducts)
+                        assertThat(products).containsAtLeast(*testProducts)
                     }
                 }
             }
@@ -239,7 +239,7 @@ internal class ShopTest {
                     assertThat(response).isJsonResponse()
 
                     response.body<OrderListResponse>().apply {
-                        assertThat(orders).containsAll(*testOrders)
+                        assertThat(orders).containsAtLeast(*testOrders)
                     }
                 }
             }
@@ -287,7 +287,7 @@ internal class ShopTest {
                         assertThat(customer.address)
 
                         assertThat(products).hasSize(order.products.size)
-                        assertThat(products).containsAll(*order.products.toTypedArray())
+                        assertThat(products).containsAtLeast(*order.products.toTypedArray())
                     }
 
                     coVerify(exactly = 1) { orderRepository.add(any()) }
@@ -365,7 +365,7 @@ internal class ShopTest {
                     assertThat(response).isJsonResponse()
 
                     response.body<OrderListResponse>().apply {
-                        assertThat(orders).containsAll(*testOrders)
+                        assertThat(orders).containsAtLeast(*testOrders)
                     }
                 }
             }
