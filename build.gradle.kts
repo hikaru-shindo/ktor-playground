@@ -107,7 +107,7 @@ dependencyCheck {
     suppressionFile = "$projectDir/.owaspignore.xml"
     autoUpdate = true
     failOnError = true
-    cveValidForHours = 24
+    nvd.validForHours = 24
     failBuildOnCVSS = 7f // Medium and up
 }
 
