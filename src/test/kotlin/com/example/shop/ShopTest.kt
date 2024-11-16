@@ -12,7 +12,7 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
 import io.mockk.*
-import org.junit.Before
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import java.util.*
 import kotlin.test.*
@@ -20,7 +20,7 @@ import kotlin.test.*
 internal class ShopTest {
     private val fabrikate = Fabrikate()
 
-    @Before fun setup() = clearAllMocks()
+    @BeforeEach fun setup() = clearAllMocks()
 
     @Nested
     inner class ProductEndpoints() {
