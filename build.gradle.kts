@@ -17,12 +17,6 @@ application {
     mainClass.set("com.example.ApplicationKt")
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
-}
-
 ktor {
     fatJar {
         archiveFileName.set("ktor-playground-$version.jar")
