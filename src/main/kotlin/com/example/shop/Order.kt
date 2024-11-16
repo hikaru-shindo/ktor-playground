@@ -37,7 +37,7 @@ class OrderRepository {
 
 @Serializable
 data class OrderListResponse(
-    val orders: List<Order>
+    val orders: List<Order>,
 ) {
     val count: Int = orders.count()
 }
@@ -47,7 +47,7 @@ data class Order(
     @Serializable(with = UUIDSerializer::class)
     val id: UUID = UUID.randomUUID(),
     val customer: Customer,
-    val products: List<Product>
+    val products: List<Product>,
 ) {
     @Serializable
     data class Product(
@@ -55,7 +55,7 @@ data class Order(
         val id: UUID,
         val name: String,
         val price: Price,
-        val quantity: Int
+        val quantity: Int,
     ) {
         @Serializable
         data class Price(val value: Double, val currencyCode: String)

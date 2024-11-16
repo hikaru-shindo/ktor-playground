@@ -26,7 +26,7 @@ fun Application.module() {
             "application",
             "ktor-playground",
             "squad",
-            "foo"
+            "foo",
         )
     }
 

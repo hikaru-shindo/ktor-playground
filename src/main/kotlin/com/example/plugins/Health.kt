@@ -12,19 +12,19 @@ fun Application.configureHealthChecks(healthEndpoint: String = "/internal/health
             get("/liveness") {
                 call.respond(
                     HttpStatusCode.OK,
-                    mapOf("status" to "UP", "groups" to arrayOf("liveness"))
+                    mapOf("status" to "UP", "groups" to arrayOf("liveness")),
                 )
             }
             get("/readiness") {
                 call.respond(
                     HttpStatusCode.OK,
-                    mapOf("status" to "UP", "groups" to arrayOf("readiness"))
+                    mapOf("status" to "UP", "groups" to arrayOf("readiness")),
                 )
             }
             get {
                 call.respond(
                     HttpStatusCode.OK,
-                    mapOf("status" to "UP", "groups" to arrayOf("liveness", "readiness"))
+                    mapOf("status" to "UP", "groups" to arrayOf("liveness", "readiness")),
                 )
             }
         }

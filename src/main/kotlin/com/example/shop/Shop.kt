@@ -12,7 +12,7 @@ import java.util.*
 fun Application.configureShop(productRepository: ProductRepository, orderRepository: OrderRepository) {
     routing {
         route("/product") {
-            get() {
+            get {
                 productRepository.findAll().let { productList ->
                     call.respond(ProductListResponse(productList))
                 }
@@ -46,7 +46,7 @@ fun Application.configureShop(productRepository: ProductRepository, orderReposit
         }
 
         route("/order") {
-            get() {
+            get {
                 orderRepository.findAll().let { orderList ->
                     call.respond(OrderListResponse(orderList))
                 }

@@ -15,7 +15,7 @@ import java.util.regex.Pattern
 
 fun Application.configureMonitoring(
     meterRegistry: PrometheusMeterRegistry,
-    metricsEndpoint: String = "/internal/metrics"
+    metricsEndpoint: String = "/internal/metrics",
 ) {
     configureRequestLogging()
     configurePrometheusMetrics(meterRegistry, metricsEndpoint)

@@ -52,7 +52,7 @@ internal class ShopTest {
         @Test fun `returns product list`() {
             val testProducts = arrayOf<Product>(
                 fabrikate.random(),
-                fabrikate.random()
+                fabrikate.random(),
             )
 
             coEvery { productRepository.findAll() } returns testProducts.toList()
@@ -221,7 +221,7 @@ internal class ShopTest {
         @Test fun `returns order list`() {
             val testOrders = arrayOf<Order>(
                 fabrikate.random(),
-                fabrikate.random()
+                fabrikate.random(),
             )
 
             coEvery { orderRepository.findAll() } returns testOrders.toList()
@@ -347,7 +347,7 @@ internal class ShopTest {
             val testCustomer = fabrikate.random<Order.Customer>()
             val testOrders = arrayOf(
                 fabrikate.random<Order>().copy(customer = testCustomer),
-                fabrikate.random<Order>().copy(customer = testCustomer)
+                fabrikate.random<Order>().copy(customer = testCustomer),
             )
 
             coEvery { orderRepository.findByCustomer(any()) } returns testOrders.toList()

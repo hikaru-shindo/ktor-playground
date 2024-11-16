@@ -6,7 +6,7 @@ plugins {
     kotlin("jvm") version "2.0.21"
     kotlin("plugin.serialization") version "2.0.21"
     id("io.ktor.plugin") version "3.0.1"
-    id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
     id("org.owasp.dependencycheck") version "8.4.3"
     id("jacoco")
 }
@@ -95,6 +95,11 @@ ktlint {
         reporter(ReporterType.JSON)
         reporter(ReporterType.HTML)
         reporter(ReporterType.PLAIN)
+    }
+
+    filter {
+        exclude("**/generated/**")
+        include("**/kotlin/**")
     }
 }
 

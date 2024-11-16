@@ -40,7 +40,7 @@ internal class ProductRepositoryTest {
     fun `can add multiple products`() = runTest {
         val testProducts = arrayOf<Product>(
             fabrikate.random(),
-            fabrikate.random()
+            fabrikate.random(),
         )
 
         testProducts.forEach { testProduct ->
@@ -81,7 +81,7 @@ internal class ProductRepositoryTest {
             fabrikate.random(),
             fabrikate.random(),
             fabrikate.random(),
-            fabrikate.random()
+            fabrikate.random(),
         )
 
         testProducts.forEach { testProduct ->

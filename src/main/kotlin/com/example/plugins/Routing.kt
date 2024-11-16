@@ -14,7 +14,7 @@ fun Application.configureRouting(meterRegistry: MeterRegistry) {
             meterRegistry.counter(
                 "error_endpoint_calls",
                 "foo",
-                "bar"
+                "bar",
             ).increment()
             throw Exception("this is a test")
         }

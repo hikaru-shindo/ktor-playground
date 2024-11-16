@@ -13,11 +13,11 @@ fun Application.configureErrorHandler() {
             when (cause) {
                 is HttpConflictException -> call.respond(
                     HttpStatusCode.Conflict,
-                    ErrorResponse.fromException(cause)
+                    ErrorResponse.fromException(cause),
                 )
                 else -> call.respond(
                     HttpStatusCode.InternalServerError,
-                    ErrorResponse.fromException(cause)
+                    ErrorResponse.fromException(cause),
                 )
             }
 
@@ -31,12 +31,12 @@ open class HttpConflictException(cause: Throwable? = null) : RuntimeException(ca
 @Serializable
 data class ErrorResponse(
     val message: String,
-    val type: String
+    val type: String,
 ) {
     companion object {
         fun fromException(exception: Throwable) = ErrorResponse(
             message = exception.message ?: "unknown error",
-            type = exception.javaClass.simpleName
+            type = exception.javaClass.simpleName,
         )
     }
 }

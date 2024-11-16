@@ -40,7 +40,7 @@ internal class OrderRepositoryTest {
     fun `can add multiple orders`() = runTest {
         val testOrders = arrayOf<Order>(
             fabrikate.random(),
-            fabrikate.random()
+            fabrikate.random(),
         )
 
         testOrders.forEach { testOrder ->
@@ -69,7 +69,7 @@ internal class OrderRepositoryTest {
             fabrikate.random(),
             fabrikate.random(),
             fabrikate.random(),
-            fabrikate.random()
+            fabrikate.random(),
         )
 
         testOrders.forEach { testOrder ->
@@ -89,12 +89,12 @@ internal class OrderRepositoryTest {
         val customer = fabrikate.random<Order.Customer>()
         val customerOrders = arrayOf(
             fabrikate.random<Order>().copy(customer = customer),
-            fabrikate.random<Order>().copy(customer = customer)
+            fabrikate.random<Order>().copy(customer = customer),
         )
         val testOrders = arrayOf(
             fabrikate.random(),
             fabrikate.random(),
-            *customerOrders
+            *customerOrders,
         )
 
         testOrders.forEach { testOrder ->
@@ -113,7 +113,7 @@ internal class OrderRepositoryTest {
     fun `unknown customer returns empty list`() = runTest {
         val testOrders = arrayOf<Order>(
             fabrikate.random(),
-            fabrikate.random()
+            fabrikate.random(),
         )
 
         testOrders.forEach { testOrder ->
