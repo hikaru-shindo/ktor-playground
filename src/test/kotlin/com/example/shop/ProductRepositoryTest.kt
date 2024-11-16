@@ -48,7 +48,7 @@ internal class ProductRepositoryTest {
         }
 
         sut.findAll().apply {
-            assertThat(this).containsAll(*testProducts)
+            assertThat(this).containsAtLeast(*testProducts)
         }
     }
 
@@ -71,7 +71,7 @@ internal class ProductRepositoryTest {
 
         sut.find(product.id).apply {
             assertThat(this).isEqualTo(product)
-            assertThat(this).isNotSameAs(product)
+            assertThat(this).isNotSameInstanceAs(product)
         }
     }
 
