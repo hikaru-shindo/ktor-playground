@@ -1,11 +1,9 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
-    application
     kotlin("jvm") version "2.0.21"
-    kotlin("plugin.serialization") version "2.0.21"
     id("io.ktor.plugin") version "3.0.1"
+    kotlin("plugin.serialization") version "2.0.21"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
     id("org.owasp.dependencycheck") version "11.1.0"
     id("jacoco")
@@ -13,14 +11,12 @@ plugins {
 
 group = "com.example"
 version = System.getProperty("version") ?: "0.0.1-SNAPSHOT"
+
 application {
     mainClass.set("com.example.ApplicationKt")
-}
 
-ktor {
-    fatJar {
-        archiveFileName.set("ktor-playground-$version.jar")
-    }
+    val isDevelopment: Boolean = project.ext.has("development")
+    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
 repositories {
@@ -55,30 +51,9 @@ dependencies {
     testImplementation("dev.forkhandles:fabrikate4k:2.20.0.0")
 }
 
-tasks {
-    test {
-        useJUnitPlatform()
-        finalizedBy(jacocoTestReport)
-    }
-
-    jacocoTestReport {
-        dependsOn(test)
-
-        reports {
-            html.required.set(true)
-            csv.required.set(false)
-            xml.required.set(true)
-        }
-    }
-
-    jacocoTestCoverageVerification {
-        violationRules {
-            rule {
-                limit {
-                    minimum = "0.6".toBigDecimal()
-                }
-            }
-        }
+ktor {
+    fatJar {
+        archiveFileName.set("ktor-playground-$version.jar")
     }
 }
 
@@ -111,8 +86,29 @@ dependencyCheck {
     failBuildOnCVSS = 7f // Medium and up
 }
 
-tasks.withType<KotlinCompile>().all {
-    kotlinOptions {
-        freeCompilerArgs += "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+tasks {
+    test {
+        useJUnitPlatform()
+        finalizedBy(jacocoTestReport)
+    }
+
+    jacocoTestReport {
+        dependsOn(test)
+
+        reports {
+            html.required.set(true)
+            csv.required.set(false)
+            xml.required.set(true)
+        }
+    }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = "0.6".toBigDecimal()
+                }
+            }
+        }
     }
 }
