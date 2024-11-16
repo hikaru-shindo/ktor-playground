@@ -48,7 +48,7 @@ internal class OrderRepositoryTest {
         }
 
         sut.findAll().apply {
-            assertThat(this).containsAll(*testOrders)
+            assertThat(this).containsAtLeast(*testOrders)
         }
     }
 
@@ -59,7 +59,7 @@ internal class OrderRepositoryTest {
 
         sut.find(order.id).apply {
             assertThat(this).isEqualTo(order)
-            assertThat(this).isNotSameAs(order)
+            assertThat(this).isNotSameInstanceAs(order)
         }
     }
 
