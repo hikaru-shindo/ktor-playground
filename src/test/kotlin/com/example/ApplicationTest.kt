@@ -14,13 +14,13 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.testing.*
 import io.micrometer.core.instrument.MeterRegistry
 import io.mockk.*
-import org.junit.Before
+import org.junit.jupiter.api.BeforeEach
 import kotlin.test.*
 
 internal class ApplicationTest {
     private val meterRegistry = mockk<MeterRegistry>(relaxed = true)
 
-    @Before fun setup() = clearAllMocks()
+    @BeforeEach fun setup() = clearAllMocks()
 
     @Test fun `root path returns hello world`() {
         testApplication {

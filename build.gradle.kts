@@ -17,12 +17,6 @@ application {
     mainClass.set("com.example.ApplicationKt")
 }
 
-java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
-}
-
 ktor {
     fatJar {
         archiveFileName.set("ktor-playground-$version.jar")
@@ -34,17 +28,17 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-content-negotiation:2.3.12")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.12")
-    implementation("io.ktor:ktor-server-metrics:2.3.12")
-    implementation("io.ktor:ktor-server-call-id:2.3.12")
-    implementation("io.ktor:ktor-server-forwarded-header:2.3.12")
-    implementation("io.ktor:ktor-server-status-pages:2.3.12")
-    implementation("io.ktor:ktor-server-call-logging:2.3.12")
-    implementation("io.ktor:ktor-server-cors:2.3.12")
-    implementation("io.ktor:ktor-server-metrics-micrometer:2.3.12")
+    implementation("io.ktor:ktor-server-content-negotiation:3.0.1")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.1")
+    implementation("io.ktor:ktor-server-metrics:3.0.1")
+    implementation("io.ktor:ktor-server-call-id:3.0.1")
+    implementation("io.ktor:ktor-server-forwarded-header:3.0.1")
+    implementation("io.ktor:ktor-server-status-pages:3.0.1")
+    implementation("io.ktor:ktor-server-call-logging:3.0.1")
+    implementation("io.ktor:ktor-server-cors:3.0.1")
+    implementation("io.ktor:ktor-server-metrics-micrometer:3.0.1")
     implementation("io.micrometer:micrometer-registry-prometheus:1.12.6")
-    implementation("io.ktor:ktor-server-netty:2.3.12") {
+    implementation("io.ktor:ktor-server-netty:3.0.1") {
         exclude("org.eclipse.jetty.alpn", "alpn-api") // HTTP/2 is not needed
     }
     implementation("ch.qos.logback:logback-classic:1.5.12")
@@ -52,8 +46,8 @@ dependencies {
 
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
 
-    testImplementation("io.ktor:ktor-server-test-host:2.3.12")
-    testImplementation("io.ktor:ktor-client-content-negotiation:2.3.12")
+    testImplementation("io.ktor:ktor-server-test-host:3.0.1")
+    testImplementation("io.ktor:ktor-client-content-negotiation:3.0.1")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:2.0.21")
     testImplementation("io.mockk:mockk:1.13.13")
