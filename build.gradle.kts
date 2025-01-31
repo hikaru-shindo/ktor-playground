@@ -5,7 +5,7 @@ plugins {
     id("io.ktor.plugin") version "3.0.3"
     kotlin("plugin.serialization") version "2.1.10"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
-    id("org.owasp.dependencycheck") version "12.0.1"
+    id("org.owasp.dependencycheck") version "12.0.2"
     id("jacoco")
 }
 
