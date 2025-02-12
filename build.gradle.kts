@@ -2,7 +2,7 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
     kotlin("jvm") version "2.1.10"
-    id("io.ktor.plugin") version "3.0.3"
+    id("io.ktor.plugin") version "3.1.0"
     kotlin("plugin.serialization") version "2.1.10"
     id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
     id("org.owasp.dependencycheck") version "12.0.2"
