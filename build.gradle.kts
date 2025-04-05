@@ -38,7 +38,7 @@ dependencies {
         exclude("org.eclipse.jetty.alpn", "alpn-api") // HTTP/2 is not needed
     }
     implementation("ch.qos.logback:logback-classic:1.5.18")
-    runtimeOnly("net.logstash.logback:logstash-logback-encoder:8.0")
+    runtimeOnly("net.logstash.logback:logstash-logback-encoder:8.1")
 
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.1")
 
