@@ -29,7 +29,7 @@ dependencies {
     implementation("io.ktor:ktor-server-metrics:3.1.3")
     implementation("io.ktor:ktor-server-call-id:3.1.3")
     implementation("io.ktor:ktor-server-forwarded-header:3.1.3")
-    implementation("io.ktor:ktor-server-status-pages:3.1.2")
+    implementation("io.ktor:ktor-server-status-pages:3.1.3")
     implementation("io.ktor:ktor-server-call-logging:3.1.3")
     implementation("io.ktor:ktor-server-cors:3.1.3")
     implementation("io.ktor:ktor-server-metrics-micrometer:3.1.3")
@@ -42,7 +42,7 @@ dependencies {
 
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
 
-    testImplementation("io.ktor:ktor-server-test-host:3.1.2")
+    testImplementation("io.ktor:ktor-server-test-host:3.1.3")
     testImplementation("io.ktor:ktor-client-content-negotiation:3.1.3")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:2.1.21")
