@@ -43,7 +43,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
 
     testImplementation("io.ktor:ktor-server-test-host:3.4.3")
-    testImplementation("io.ktor:ktor-client-content-negotiation:3.4.2")
+    testImplementation("io.ktor:ktor-client-content-negotiation:3.4.3")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:2.3.20")
     testImplementation("io.mockk:mockk:1.14.9")
