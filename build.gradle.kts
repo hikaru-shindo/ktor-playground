@@ -60,7 +60,7 @@ ktor {
 jacoco {
     // fix an issue with new JRE versions
     // see: https://github.com/gradle/gradle/issues/15038
-    toolVersion = "0.8.14"
+    toolVersion = "0.8.15"
 }
 
 ktlint {
