@@ -25,8 +25,8 @@ repositories {
 
 dependencies {
     implementation("io.ktor:ktor-server-content-negotiation:3.5.2")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:3.5.1")
-    implementation("io.ktor:ktor-server-metrics:3.5.1")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:3.5.2")
+    implementation("io.ktor:ktor-server-metrics:3.5.2")
     implementation("io.ktor:ktor-server-call-id:3.5.2")
     implementation("io.ktor:ktor-server-forwarded-header:3.5.2")
     implementation("io.ktor:ktor-server-status-pages:3.5.2")
